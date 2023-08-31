@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework>net4.6.2</TargetFramework>
+    <RootNamespace>VPet.Plugin.API</RootNamespace>
+    <ProjectGuid>{85e1a1a3-7ebc-4fbb-8e67-4061d62ea8f5}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="VPet-Simulator.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>library\VPet-Simulator.Core.1.0.0\lib\net462\VPet-Simulator.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="VPet-Simulator.Windows.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>library\VPet-Simulator.Windows.Interface.1.0.0\lib\net462\VPet-Simulator.Windows.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Panuon.WPF.UI, Version=1.1.15.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>library\Panuon.WPF.UI.1.1.15.6\lib\net462\Panuon.WPF.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+</Project>

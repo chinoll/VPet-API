@@ -1,0 +1,5 @@
+bin/
+obj/
+VPet-API.sln
+library/
+*.exe
