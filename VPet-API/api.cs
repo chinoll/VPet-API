@@ -67,7 +67,17 @@ namespace VPet.Plugin.API {
             MW.Main.DisplayIdel();
             return Convert.ToString(true);
         }
-        
+        public string DisplayBLoopingToNomal(Dictionary<string,string> param) {
+            if (param.ContainsKey("graphname"))
+                MW.Main.DisplayBLoopingToNomal(param["graphname"],int.Parse(param["loopLength"]));
+            else
+                MW.Main.DisplayBLoopingToNomal(int.Parse(param["loopLength"]));
+            return Convert.ToString(true);
+        }
+        public string DisplaySleep(Dictionary<string,string> param) {
+            MW.Main.DisplaySleep(bool.Parse(param["force"]));
+            return Convert.ToString(true);
+        }
         public Dictionary<string,Func<Dictionary<string, string>, string>> GetAPI() {
             Dictionary<string,Func<Dictionary<string, string>, string>> funcmap = new Dictionary<string,Func<Dictionary<string, string>, string>>();
             funcmap["WorkTimerDisplayType"] = WorkTimerDisplayType;
@@ -85,6 +95,8 @@ namespace VPet.Plugin.API {
             funcmap["DisplayIdel_StateONE"] = DisplayIdel_StateONE;
             funcmap["DisplayIdel_StateTWO"] = DisplayIdel_StateTWO;
             funcmap["DisplayIdel"] = DisplayIdel;
+            funcmap["DisplayBLoopingToNomal"] = DisplayBLoopingToNomal;
+            funcmap["DisplaySleep"] = DisplaySleep;
             return funcmap;
         }
     }
