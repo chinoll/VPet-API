@@ -14,18 +14,12 @@ namespace VPet.Plugin.API {
         private HttpListener listener;
         private VPET_API api;
         public API(IMainWindow mainwin) : base(mainwin) {
-            //此处主窗体玩家,Core等信息均为空,请不要加载游戏和玩家数据
             MW = mainwin;
         }
         public override void LoadPlugin() {
             api = new VPET_API(MW);
             Thread th = new Thread(mainloop);
             th.Start();
-            // Main main = MW.Main;
-            // WorkTimer timer = main.WorkTimer;
-            // StreamWriter sw = new StreamWriter("test.txt");
-            // sw.WriteLine(timer.GetCount);
-            // sw.Close();
         }
         public void mainloop() {
             Main main = MW.Main;
@@ -86,14 +80,6 @@ namespace VPet.Plugin.API {
             return pairs;
         }
 
-        // private int APIGetCount()
-        // {
-        //     return MW.WorkTimer.GetCount;
-        // }
-        // private int APIGetCount()
-        // {
-        //     return MW.WorkTimer.GetCount;
-        // }
         public override void Setting()
         {
             base.Setting();
