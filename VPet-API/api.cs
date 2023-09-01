@@ -14,10 +14,18 @@ namespace VPet.Plugin.API {
             MW = window;
         }
         public string WorkTimerDisplayType(Dictionary<string,string> param) {
-            return Convert.ToString(MW.Main.WorkTimer.DisplayType);
+            int type = MW.Main.WorkTimer.DisplayType;
+            if (param.ContainsKey("type")) {
+                MW.Main.WorkTimer.DisplayType = int.Parse(param["type"]);
+            }
+            return Convert.ToString(type);
         }
         public string WorkTimerGetCount(Dictionary<string,string> param) {
-            return Convert.ToString(MW.Main.WorkTimer.GetCount);
+            double count = MW.Main.WorkTimer.GetCount;
+            if (param.ContainsKey("count")) {
+                MW.Main.WorkTimer.GetCount = double.Parse(param["count"]);
+            }
+            return Convert.ToString(count);
         }
         public string WorkTimerStartTime(Dictionary<string,string> param) {
             return  MW.Main.WorkTimer.StartTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -78,6 +86,91 @@ namespace VPet.Plugin.API {
             MW.Main.DisplaySleep(bool.Parse(param["force"]));
             return Convert.ToString(true);
         }
+        public string DisplayBLoopingForce(Dictionary<string,string> param) {
+            MW.Main.DisplayBLoopingForce(param["graphname"]);
+            return Convert.ToString(true);
+        }
+        public string DisplayRaised(Dictionary<string,string> param) {
+            MW.Main.DisplayRaised();
+            return Convert.ToString(true);
+        }
+        public string DisplayCEndtoNomal(Dictionary<string,string> param) {
+            MW.Main.DisplayCEndtoNomal(param["graphname"]);
+            return Convert.ToString(true);
+        }
+        public string Display(Dictionary<string,string> param) {
+            //TODO
+            return "todo";
+        }
+        public string OnSay(Dictionary<string,string> param) {
+            //TODO
+            return "todo";
+        }
+        public string LastInteractionTime(Dictionary<string,string> param) {
+            return MW.Main.LastInteractionTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+        public string Say(Dictionary<string,string> param) {
+            MW.Main.Say(param["text"],param["graphname"],bool.Parse(param["force"]));
+            return Convert.ToString(true);
+        }
+        public string LabelDisplayShow(Dictionary<string,string> param) {
+            MW.Main.LabelDisplayShow(param["text"],int.Parse(param["time"]));
+            return Convert.ToString(true);
+        }
+        public string LabelDisplayShowChangeNumber(Dictionary<string,string> param) {
+            MW.Main.LabelDisplayShowChangeNumber(param["text"],double.Parse(param["changenum1"]),double.Parse(param["changenum2"]),int.Parse(param["time"]));
+            return Convert.ToString(true);
+        }
+        public string FunctionSpend(Dictionary<string,string> param) {
+            MW.Main.FunctionSpend(double.Parse(param["TimePass"]));
+            return Convert.ToString(true);
+        }
+        public string RandomInteractionAction(Dictionary<string,string> param) {
+            string return_str = "[";
+            foreach (Func<bool> value in MW.Main.RandomInteractionAction)
+                return_str += Convert.ToString(value()) + ",";
+            return_str += "]";
+            return return_str;
+        }
+        public string FunctionSpendHandle(Dictionary<string,string> param) {
+            //TODO
+            return "todo";
+        }
+        public string EventTimer_Elapsed(Dictionary<string,string> param) {
+            MW.Main.EventTimer_Elapsed();
+            return Convert.ToString(true);
+        }
+        public string SetMoveTimerPoint(Dictionary<string,string> param) {
+            if (param.ContainsKey("x"))
+                MW.Main.MoveTimerPoint.X = double.Parse(param["x"]);
+            if (param.ContainsKey("y"))
+                MW.Main.MoveTimerPoint.Y = double.Parse(param["y"]);
+            return Convert.ToString(true);
+        }
+        public string GetMoveTimerPoint(Dictionary<string,string> param) {
+            double x,y;
+            x = MW.Main.MoveTimerPoint.X;
+            y = MW.Main.MoveTimerPoint.Y;
+            return string.Format("[{0},{1}]",x,y);
+        }
+        public string SetLogicInterval(Dictionary<string,string> param) {
+            MW.Main.SetLogicInterval(int.Parse(param["Interval"]));
+            return Convert.ToString(true);
+        }
+        public string SetMoveMode(Dictionary<string,string> param) {
+            MW.Main.SetMoveMode(bool.Parse(param["AllowMove"]),bool.Parse(param["smartMove"]),int.Parse(param["SmartMoveInterval"]));
+            return Convert.ToString(true);
+        }
+        public string State(Dictionary<string,string> param) {
+            //TODO
+            return "todo";
+        }
+        public string StateID(Dictionary<string,string> param) {
+            return Convert.ToString(MW.Main.StateID);
+        }
+        public string nowWork(Dictionary<string,string> param) {
+            return Convert.ToString(MW.Main.nowWork);
+        }
         public Dictionary<string,Func<Dictionary<string, string>, string>> GetAPI() {
             Dictionary<string,Func<Dictionary<string, string>, string>> funcmap = new Dictionary<string,Func<Dictionary<string, string>, string>>();
             funcmap["WorkTimerDisplayType"] = WorkTimerDisplayType;
@@ -97,6 +190,23 @@ namespace VPet.Plugin.API {
             funcmap["DisplayIdel"] = DisplayIdel;
             funcmap["DisplayBLoopingToNomal"] = DisplayBLoopingToNomal;
             funcmap["DisplaySleep"] = DisplaySleep;
+            funcmap["DisplayBLoopingForce"] = DisplayBLoopingForce;
+            funcmap["DisplayRaised"] = DisplayRaised;
+            funcmap["DisplayCEndtoNomal"] = DisplayCEndtoNomal;
+            funcmap["Display"] = Display;
+            funcmap["LastInteractionTime"] = LastInteractionTime;
+            funcmap["Say"] = Say;
+            funcmap["LabelDisplayShow"] = LabelDisplayShow;
+            funcmap["LabelDisplayShowChangeNumber"] = LabelDisplayShowChangeNumber;
+            funcmap["FunctionSpend"] = FunctionSpend;
+            funcmap["RandomInteractionAction"] = RandomInteractionAction;
+            funcmap["EventTimer_Elapsed"] = EventTimer_Elapsed;
+            funcmap["SetMoveTimerPoint"] = SetMoveTimerPoint;
+            funcmap["GetMoveTimerPoint"] = GetMoveTimerPoint;
+            funcmap["SetLogicInterval"] = SetLogicInterval;
+            funcmap["SetMoveMode"] = SetMoveMode;
+            funcmap["StateID"] = StateID;
+            funcmap["nowWork"] = nowWork;
             return funcmap;
         }
     }
