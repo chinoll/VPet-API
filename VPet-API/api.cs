@@ -169,7 +169,40 @@ namespace VPet.Plugin.API {
             return Convert.ToString(MW.Main.StateID);
         }
         public string nowWork(Dictionary<string,string> param) {
+            //TODO
             return Convert.ToString(MW.Main.nowWork);
+        }
+        public string MessageBarShow(Dictionary<string,string> param) {
+            MW.Main.MsgBar.Show(param["name"],param["text"]);
+            return Convert.ToString(true);
+        }
+        public string MessageBarForceClose(Dictionary<string,string> param) {
+            MW.Main.MsgBar.ForceClose();
+            return Convert.ToString(true);
+        }
+        public string AddMenuButton(Dictionary<string,string> param) {
+            //TODO
+            return "todo";
+        }
+        public string Resolution(Dictionary<string,string> param) {
+            int res = MW.Core.Graph.Resolution;
+            //TODO
+            return Convert.ToString(res);
+        }
+        public string GraphsName(Dictionary<string,string> param) {
+            var name = MW.Core.Graph.GraphsName;
+            //TODO
+            return Convert.ToString(name);
+        }
+        public string GraphsList(Dictionary<string,string> param) {
+            var list = MW.Core.Graph.GraphsList;
+            //TODO
+            return Convert.ToString(list);
+        }
+        public string CommUIElements(Dictionary<string,string> param) {
+            var elem = MW.Core.Graph.CommUIElements;
+            //TODO
+            return Convert.ToString(elem);
         }
         public Dictionary<string,Func<Dictionary<string, string>, string>> GetAPI() {
             Dictionary<string,Func<Dictionary<string, string>, string>> funcmap = new Dictionary<string,Func<Dictionary<string, string>, string>>();
@@ -207,6 +240,8 @@ namespace VPet.Plugin.API {
             funcmap["SetMoveMode"] = SetMoveMode;
             funcmap["StateID"] = StateID;
             funcmap["nowWork"] = nowWork;
+            funcmap["MessageBarShow"] = MessageBarShow;
+            funcmap["Resolution"] = Resolution;
             return funcmap;
         }
     }
